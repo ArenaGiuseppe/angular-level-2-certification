@@ -1,0 +1,32 @@
+<div class="home-tab">
+<div class="card">
+  <div class="card-header">
+    <h3>Quiz Results</h3>
+  </div>
+  <div class="container-full">
+    <ul>
+      <li *ngFor="let question of triviaQuestions">
+        <p [innerHTML]="question.question"></p>
+        <div>
+          <button
+            *ngFor="let answer of question.all_answers"
+            [ngClass]="{
+              correct: isAnswerCorrect(question, answer),
+              incorrect: isAnswerSelectedIncorrect(question, answer)
+            }"
+            [class.correct-answer]="isAnswerCorrect(question, answer)"
+            [class.incorrect-answer]="isAnswerSelectedIncorrect(question, answer)"
+          >
+          <span [innerHTML]="answer"></span>
+          </button>
+        </div>
+      </li>
+    </ul>
+    <div class="final-score" [style.background-color]="getScoreColor()">
+      <p>Final Score: {{ finalScore }}</p>
+    </div>
+    
+    <button class="btn btn-primary" (click)="redirectToQuizCreation()">Create New Quiz</button>
+  </div>
+</div>
+</div>

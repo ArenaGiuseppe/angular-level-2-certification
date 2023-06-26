@@ -1,0 +1,37 @@
+.container-full {
+  width: 93%;
+  border-radius: 25px;
+  border: 2px solid black;
+  padding: 15px;
+  margin: 20px;
+  background: white;
+  overflow: auto;
+  box-shadow: 5px 5px 2px #888888;
+  text-align: center;
+}
+
+.button-answer.correct {
+  background-color: lightgreen;
+  border-color: green;
+  color: white;
+}
+
+.button-answer.incorrect {
+  background-color: #ffcccc !important;
+  border-color: red !important;
+  color: black !important;
+}
+
+
+.correct-answer {
+  border: 2px solid green;
+  background-color: green;
+  color: white;
+}
+
+.incorrect-answer {
+  border: 2px solid red;
+  background-color: red;
+  color: white;
+}
+

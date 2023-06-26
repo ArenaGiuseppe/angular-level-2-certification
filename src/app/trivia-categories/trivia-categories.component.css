@@ -1,0 +1,25 @@
+.container-full {
+  width: 93%;
+  border-radius: 25px;
+  border: 2px solid Black;
+  padding: 15px 15px 15px 15px;
+  margin: 20px 20px 20px 20px;
+  background: white;
+  overflow: auto;
+  box-shadow: 5px 5px 2px #888888;
+  position: center;
+}
+
+.button-answer {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.button-answer.selected {
+  border: 2px solid green;
+  background-color: lightgreen;
+}
