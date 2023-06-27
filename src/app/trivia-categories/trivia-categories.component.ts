@@ -18,9 +18,10 @@ import { QuizDataService } from '../services/quiz-data.service';
   styleUrls: ['./trivia-categories.component.css'],
 })
 export class TriviaCategoriesComponent implements OnInit, AfterViewInit {
-  @ViewChild('categorySelect') categorySelectRef!: ElementRef;
-  @ViewChild('difficultySelect') difficultySelectRef!: ElementRef;
-  @ViewChild('createBtn') createBtnRef!: ElementRef;
+
+  categorySelectRef!: ElementRef<HTMLSelectElement>;
+  difficultySelectRef!: ElementRef<HTMLSelectElement>;
+  createBtnRef!: ElementRef<HTMLButtonElement>;
 
   myForm: FormGroup = new FormGroup({});
   categoriesList: TriviaCategories[] = [];
@@ -39,37 +40,40 @@ export class TriviaCategoriesComponent implements OnInit, AfterViewInit {
       categories: new FormControl(),
       difficulty: new FormControl(),
     });
-  
+
     this.quizService.getListOfCategories().subscribe((categories) => {
       this.categoriesList = categories;
     });
   }
-  
 
   ngAfterViewInit() {
-    const categorySelect = this.categorySelectRef
-      .nativeElement as HTMLSelectElement;
-    const difficultySelect = this.difficultySelectRef
-      .nativeElement as HTMLSelectElement;
-    const createBtn = this.createBtnRef.nativeElement as HTMLButtonElement;
+    const categorySelect = document.getElementById(
+      'categorySelect'
+    ) as HTMLSelectElement;
+    const difficultySelect = document.getElementById(
+      'difficultySelect'
+    ) as HTMLSelectElement;
+    const createBtn = document.getElementById('createBtn') as HTMLButtonElement;
 
-    categorySelect.id = 'categorySelect';
-    difficultySelect.id = 'difficultySelect';
-    createBtn.id = 'createBtn';
+    this.categorySelectRef = new ElementRef(categorySelect);
+    this.difficultySelectRef = new ElementRef(difficultySelect);
+    this.createBtnRef = new ElementRef(createBtn);
   }
 
   generateQuiz() {
     const category = this.myForm.get('categories')?.value;
     const difficulty = this.myForm.get('difficulty')?.value;
-  
+
     if (category && difficulty) {
       this.dropdownsSelected = true;
-      this.quizService.getTriviaQuestions(category, difficulty).subscribe((questions) => {
-        this.triviaQuestions = questions.map((question) => {
-          const allAnswers = this.displayRandomlyOrderResponse(question);
-          return { ...question, all_answers: allAnswers };
+      this.quizService
+        .getTriviaQuestions(category, difficulty)
+        .subscribe((questions) => {
+          this.triviaQuestions = questions.map((question) => {
+            const allAnswers = this.displayRandomlyOrderResponse(question);
+            return { ...question, all_answers: allAnswers };
+          });
         });
-      });
     } else {
       this.dropdownsSelected = false;
       this.triviaQuestions = [];
@@ -81,7 +85,6 @@ export class TriviaCategoriesComponent implements OnInit, AfterViewInit {
     const difficulty = this.myForm.get('difficulty')?.value;
     return !(category && difficulty);
   }
-  
 
   displayRandomlyOrderResponse(question: TriviaQuestion): string[] {
     const answers = [...question.incorrect_answers, question.correct_answer];
