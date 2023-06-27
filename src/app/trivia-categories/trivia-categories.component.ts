@@ -3,7 +3,6 @@ import {
   OnInit,
   AfterViewInit,
   ElementRef,
-  ViewChild,
 } from '@angular/core';
 import { TriviaCategories } from '../models/trivia-categories.model';
 import { QuizService } from '../services/quiz.service';
