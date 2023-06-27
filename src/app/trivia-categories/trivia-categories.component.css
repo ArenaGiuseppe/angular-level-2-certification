@@ -23,3 +23,12 @@
   border: 2px solid green;
   background-color: lightgreen;
 }
+
+.container-full.form-inline {
+  display: flex;
+  align-items: center;
+}
+
+.container-full .form-group {
+  margin-right: 10px;
+}
