@@ -10,6 +10,10 @@
         <div>
           <button
             *ngFor="let answer of question.all_answers"
+            [ngClass]="{
+              correct: isAnswerCorrect(question, answer),
+              incorrect: isAnswerSelectedIncorrect(question, answer)
+            }"
             [class.correct-answer]="isAnswerCorrect(question, answer)"
             [class.incorrect-answer]="isAnswerSelectedIncorrect(question, answer)"
           >
